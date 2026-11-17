@@ -65,7 +65,7 @@ for i, text in enumerate(test_texts, 1):
     res_data = response.json()
     try:
       model_answer = (
-          res_data["candidates"][0]["content"]["parts"][0]["text"].strip()
+          res_data.get("candidates", [])[0].get("content", {}).get("parts", [])[0].get("text")
       )
       print(f"Результат від LLM: {model_answer}")
     except (KeyError, IndexError):
